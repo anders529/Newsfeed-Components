@@ -100,20 +100,9 @@ const data = [
   // </div>
 
 //   Hint: You will need to use createElement more than once here!
-      function createArticle(title, content) {
-          const artcl = document.createElement('div');
-          const title = document.createElement('h2');
-          const date = document.createElement('p');
-          const p1 = document.createElement('p');
-          const p2 = document.createElement('p');
-          const p3 = document.createElement('p');
-          const span = document.createElement('span');
-}
 
 //   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
-      // function ojct () {
 
-      // }
 //   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
 //   Step 3: return the entire component.
@@ -121,3 +110,49 @@ const data = [
 //   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
 //   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+
+function createArticles(articleTitle, articleDate, paragraphOne, paragraphTwo, paragraphThree) {
+  const artcl = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const btnDiv = document.createElement('span');
+  const btnOpn = document.createElement('button');
+  const btnClse = document.createElement('button');
+
+  artcl.classList.add('article');
+  date.classList.add('date');
+  btnDiv.classList.add('expandButton')
+  btnOpn.classList.add('close');
+  btnClse.classList.add('close');
+
+  const open = '\u25bc';
+  const close = '\u25b2';
+
+  btnOpn.textContent = open;
+  btnClse.textContent = close;
+  title.textContent = articleTitle;
+  date.textContent = articleDate;
+  p1.textContent = paragraphOne;
+  p2.textContent = paragraphTwo;
+  p3.textContent = paragraphThree;
+
+  btnOpn.addEventListener('click', () => {
+    artcl.classList.toggle('article-open'); });
+  
+  artcl.appendChild(title);
+  artcl.appendChild(date);
+  artcl.appendChild(btnOpn);
+  artcl.appendChild(p1);
+  artcl.appendChild(p2);
+  artcl.appendChild(p3);
+  return artcl;
+}
+
+const artclDiv = document.querySelector('.articles');
+
+data.forEach((data) => {
+  artclDiv.appendChild(createArticles(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph));
+})
